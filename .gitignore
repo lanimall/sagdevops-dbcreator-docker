@@ -1,0 +1,25 @@
+## project specific
+environments/runtime.properties
+
+# SoftwareAG specific
+licenseKey.xml
+*license.xml
+*license.key
+*_*.xml
+build/
+
+# IDE
+.idea
+.idea/
+*.iml
+
+# ---> macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
