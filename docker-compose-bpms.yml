@@ -20,9 +20,7 @@ services:
 
   # command central server has DBC installed...so can use this as is
   dbsetup:
-    image: store/softwareag/commandcentral:10.1.0.1-server
-    volumes:
-      - ./:/src
+    image: softwareag/dbcreator
     networks:
       - sagdevops
     environment:
@@ -30,11 +28,14 @@ services:
       - db.type=oracle
       - db.host=wMBPMS_db
       - db.port=1521
+      - db.tablespace.dir=/u01/app/oracle/oradata/XE
+      - db.admin.username=system
+      - db.admin.password=oracle
       - db.username=webmbpms
       - db.password=strong123!
       - db.product.version=latest
       - db.component.version=latest
+      - db.components=[STR]
       - db.products=[IS,BPM,MWS]
-    command: sagccant setup
     depends_on:
       - wMBPMS_db

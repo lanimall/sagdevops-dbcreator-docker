@@ -47,7 +47,6 @@ services:
       - sagdevops
     environment:
       - CC_SERVER=cce
-      - CC_TEMPLATE=dbc
     command: sagccant setup_nostart -Dcc=test -Denv=bpms
     depends_on:
       - db

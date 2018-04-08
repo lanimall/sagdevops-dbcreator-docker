@@ -18,3 +18,11 @@ services:
       - ORACLE_ALLOW_REMOTE=true
       - ORACLE_DISABLE_ASYNCH_IO=true
       - ORACLE_ENABLE_XDB=false
+
+  dbcreator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: softwareag/dbcreator
+    networks:
+      - sagdevops

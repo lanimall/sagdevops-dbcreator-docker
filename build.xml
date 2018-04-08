@@ -54,11 +54,15 @@
         <set-property-if-nonempty name="db.type" if-property-isset="env.db.type" />
         <set-property-if-nonempty name="db.host" if-property-isset="env.db.host" />
         <set-property-if-nonempty name="db.port" if-property-isset="env.db.port" />
+        <set-property-if-nonempty name="db.tablespace" if-property-isset="env.db.tablespace" />
         <set-property-if-nonempty name="db.product.version" if-property-isset="env.db.product.version" />
         <set-property-if-nonempty name="db.component.version" if-property-isset="env.db.component.version" />
+        <set-property-if-nonempty name="db.components" if-property-isset="env.db.components" />
         <set-property-if-nonempty name="db.products" if-property-isset="env.db.products" />
         <set-property-if-nonempty name="db.username" if-property-isset="env.db.username" />
         <set-property-if-nonempty name="db.password" if-property-isset="env.db.password" />
+        <set-property-if-nonempty name="db.admin.username" if-property-isset="env.db.admin.username" />
+        <set-property-if-nonempty name="db.admin.password" if-property-isset="env.db.admin.password" />
 
         <!-- saving to env file because there's no other way...we need to pass these values using that env file -->
         <propertyfile file="${env.properties}">
@@ -66,12 +70,17 @@
             <entry key="db.type" value="${db.type}" if:set="db.type" />
             <entry key="db.host" value="${db.host}" if:set="db.host" />
             <entry key="db.port" value="${db.port}" if:set="db.port" />
+            <entry key="db.tablespace" value="${db.tablespace}" if:set="db.tablespace" />
+
             <entry key="db.username" value="${db.username}" if:set="db.username" />
             <entry key="db.password" value="${db.password}" if:set="db.password" />
+            <entry key="db.admin.username" value="${db.admin.username}" if:set="db.admin.username" />
+            <entry key="db.admin.password" value="${db.admin.password}" if:set="db.admin.password" />
 
             <entry key="db.product.version" value="${db.product.version}" if:set="db.product.version" />
             <entry key="db.component.version" value="${db.component.version}" if:set="db.component.version" />
             <entry key="db.products" value="${db.products}" if:set="db.products" />
+            <entry key="db.components" value="${db.components}" if:set="db.components" />
         </propertyfile>
 
         <property file="${env.properties}" />
