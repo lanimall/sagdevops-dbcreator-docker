@@ -37,7 +37,7 @@ docker images
 Simply build the base image "softwareag/base-oracle-xe-11g:latest" by running:
 
 ```bash
-docker-compose -f docker-compose-baseoracle.yml build
+docker-compose -f docker-compose-build.yml build
 Building db
 Step 1/2 : FROM wnameless/oracle-xe-11g
  ---> f794779ccdb9
@@ -58,13 +58,19 @@ simply use the rigtht docker-compose file in following commands:
 For BPMS (IS/BPMS/MWS):
 
 ```bash
-docker-compose -f docker-compose-bpms.yml  run --rm dbsetup
+docker-compose run --rm setup_bpms_db
 ```
 
 For IS:
 
 ```bash
-docker-compose -f docker-compose-is.yml  run --rm dbsetup
+docker-compose run --rm setup_is_db
+```
+
+For MWS:
+
+```bash
+docker-compose run --rm setup_is_db
 ```
 
 ### Verifications (using BPMS configuration)
@@ -114,4 +120,30 @@ WEBMDATA		       AGW_EVENT_EG
 etc...
 etc...
 etc...
+```
+
+## Storing as a Docker Image
+
+At this point, we can easily create instances with the right schema (as seen above), but not yet save it all in a complete Dockerfile.
+
+As such, not ideal for now, but we can commit the DBs after executing the docker-compose.yml file.
+
+NOTE: Update the commands below with your docker instance IDs.
+
+```bash
+docker commit 32e26cd5cade registry.docker.tests:5000/softwareag_dbs/is-oracle:10.1
+
+docker commit 11cf6b503bb3 registry.docker.tests:5000/softwareag_dbs/mws-oracle:10.1
+
+docker commit 0d71bc1218c2 registry.docker.tests:5000/softwareag_dbs/bpms-oracle:10.1
+```
+
+Then, you can push each image to an internal registry for re-use accross your projects!
+
+```bash
+docker push registry.docker.tests:5000/softwareag_dbs/is-oracle:10.1
+
+docker push registry.docker.tests:5000/softwareag_dbs/mws-oracle:10.1
+
+docker push registry.docker.tests:5000/softwareag_dbs/bpms-oracle:10.1
 ```

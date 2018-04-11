@@ -1,7 +1,7 @@
 version: "3"
 
 networks:
-  sagdevops:
+  sagdevops_dbs:
 
 services:
   db:
@@ -21,7 +21,7 @@ services:
     image: softwareag/dbc_managed:10.1
     hostname: dbc
     networks:
-      - sagdevops
+      - sagdevops_dbs
     ports:
       - "8092:8092"
       - "8093:8093"
@@ -34,7 +34,7 @@ services:
   cce:
     image: store/softwareag/commandcentral:10.1.0.1-server
     networks:
-      - sagdevops
+      - sagdevops_dbs
     ports:
       - "8090:8090"
       - "8091:8091"
@@ -44,7 +44,7 @@ services:
     volumes:
       - ./:/src
     networks:
-      - sagdevops
+      - sagdevops_dbs
     environment:
       - CC_SERVER=cce
     command: sagccant setup_nostart -Dcc=test -Denv=bpms
