@@ -70,15 +70,15 @@ docker-compose run --rm setup_is_db
 For MWS:
 
 ```bash
-docker-compose run --rm setup_is_db
+docker-compose run --rm setup_mws_db
 ```
 
 ### Verifications (using BPMS configuration)
 
-Run:
+If not already done in previosu section, run the following command to start and setup the BPMS database:
 
 ```bash
-docker-compose -f docker-compose-bpms.yml  run --rm dbsetup
+docker-compose -f docker-compose.yml run --rm setup_bpms_db
 ```
 
 After few minutes, the script should be succesfull, and the running oracle instance should have the required DB object loaded.
@@ -146,4 +146,25 @@ docker push registry.docker.tests:5000/softwareag_dbs/is-oracle:10.1
 docker push registry.docker.tests:5000/softwareag_dbs/mws-oracle:10.1
 
 docker push registry.docker.tests:5000/softwareag_dbs/bpms-oracle:10.1
+```
+
+Then, you could simply use a simpler docker file as the one shown in  ./docker-compose-db-simple.yml, 
+and create SAG DBs without setup phases by executing:
+
+For BPMS (IS/BPMS/MWS):
+
+```bash
+docker-compose -f docker-compose-db-simple.yml up -d bpms_db
+```
+
+For IS:
+
+```bash
+docker-compose -f docker-compose-db-simple.yml up -d is_db
+```
+
+For MWS:
+
+```bash
+docker-compose -f docker-compose-db-simple.yml up -d mws_db
 ```
