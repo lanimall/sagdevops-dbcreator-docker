@@ -75,24 +75,21 @@ docker-compose run --rm setup_mws_db
 
 ### Verifications (using BPMS configuration)
 
-If not already done in previosu section, run the following command to start and setup the BPMS database:
+The verification is the same for all 3 commands run above... for example purpose, we'll use the BPMS config.
 
-```bash
-docker-compose -f docker-compose.yml run --rm setup_bpms_db
-```
+Once you've run 1 of the docker-compose command above, it will take a few minutes, and all you should see running are the
+docker oracle instances (since the instance named "setup_*" will exit after completion).
 
-After few minutes, the script should be succesfull, and the running oracle instance should have the required DB object loaded.
-
-Verify running DB instance:
+Verify that indeed you see only the running DB instance (and not the setup_* instance...which would mean the setup is still going on)
 
 ```bash
 docker ps
-```
 
 CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS                                                      NAMES
 ceedc56c1354        softwareag/oracle-xe-11g   "/bin/sh -c '/usr/sb…"   About an hour ago   Up 8 minutes        8080/tcp, 0.0.0.0:49160->22/tcp, 0.0.0.0:49161->1521/tcp   wmdbcreator_wMBPMS_db_1
+```
 
-Verify the DB instance:
+Now, let's check that indeed the required objects were created in this DB instance.
 
 Login to the running DB instance and use sqlplus as usual:
 
@@ -148,8 +145,8 @@ docker push registry.docker.tests:5000/softwareag_dbs/mws-oracle:10.1
 docker push registry.docker.tests:5000/softwareag_dbs/bpms-oracle:10.1
 ```
 
-Then, you could simply use a simpler docker file as the one shown in  ./docker-compose-db-simple.yml, 
-and create SAG DBs without setup phases by executing:
+Then, you could simply use a simpler docker file (like the one shown in [docker-compose-db-simple.yml](./docker-compose-db-simple.yml),
+and create bare SAG DBs without the setup phases by executing:
 
 For BPMS (IS/BPMS/MWS):
 
