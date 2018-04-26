@@ -8,6 +8,17 @@ A project to automatically add the right DB schemas / objects etc... for any pro
 Before you start ensure you have installed [Docker](https://www.docker.com/products/overview)
 including docker-compose tool.
 
+
+### Clone or Download this project
+
+For git clone:
+```
+git clone --recurse https://github.com/lanimall/sagdevops-dbcreator-docker.git
+```
+
+If you download instead of "git clone", it will not download the "antcc" submodule. 
+So in this case, make sure to download that submodule separately and add it to the antcc subfolder.
+
 ### Get Command Central image from Docker Store
 Also, the project relies on the Command Central image that can be found on Docker Store.
 Refer to https://store.docker.com/images/softwareag-commandcentral
